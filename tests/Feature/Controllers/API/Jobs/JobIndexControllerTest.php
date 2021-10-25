@@ -10,7 +10,7 @@ use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class JobIndexTest extends TestCase
+class JobIndexControllerTest extends TestCase
 {
     /** @var string $endpoint */
     protected string $endpoint;

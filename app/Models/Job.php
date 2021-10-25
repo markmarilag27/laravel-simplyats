@@ -25,7 +25,8 @@ class Job extends Model
         'type',
         'experience',
         'description',
-        'status'
+        'status',
+        'user_id'
     ];
 
     /**
