@@ -1,13 +1,16 @@
 <?php
 
-namespace Tests\Feature\Controllers\API\Auth;
+declare(strict_types=1);
 
-use App\Http\Controllers\API\Auth\MeController;
+namespace Tests\Feature\Controllers\API\Jobs;
+
+use App\Http\Controllers\API\Jobs\JobIndexController;
+use App\Models\Job;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class MeControllerTest extends TestCase
+class JobIndexTest extends TestCase
 {
     /** @var string $endpoint */
     protected string $endpoint;
@@ -21,7 +24,7 @@ class MeControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->endpoint = action(MeController::class);
+        $this->endpoint = action(JobIndexController::class);
     }
 
     /** @test */
@@ -39,24 +42,27 @@ class MeControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_return_user_information(): void
+    public function it_returns_job_list_collection(): void
     {
-        // Mock authenticated user
-        Sanctum::actingAs(User::factory()->create());
+        // Make the user
+        $user = User::factory()->create();
+
+        // Mock authentication
+        Sanctum::actingAs($user);
 
         // Make sure user is authenticated
         $this->assertAuthenticated();
 
+        // Mock jobs
+        Job::factory()->count(15)->create(['user_id' => $user->id]);
+
         // Make the request
         $this->json('GET', $this->endpoint)
             ->assertOk()
-            ->assertJsonStructure(['data' => [
-                'uuid',
-                'name',
-                'email',
-                'email_verified_at',
-                'updated_at',
-                'created_at'
-            ]]);
+            ->assertJsonStructure([
+                'data',
+                'links',
+                'meta'
+            ]);
     }
 }

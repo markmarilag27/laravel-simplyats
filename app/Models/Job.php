@@ -41,4 +41,21 @@ class Job extends Model
      * @var array
      */
     protected $casts = [];
+
+    /*
+     *******************************************************************************
+     * Eloquent Relationships
+     * @doc https://laravel.com/docs/8.x/eloquent-relationships
+     *******************************************************************************
+     */
+
+    /**
+     * Get the author of the posted job
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

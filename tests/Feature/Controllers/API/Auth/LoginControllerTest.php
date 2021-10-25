@@ -167,6 +167,7 @@ class LoginControllerTest extends TestCase
                 'access_token',
                 'user' => [
                     'uuid',
+                    'name',
                     'email',
                     'email_verified_at',
                     'updated_at',
