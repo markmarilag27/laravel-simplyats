@@ -12,6 +12,7 @@ use Tests\TestCase;
 
 class JobShowControllerTest extends TestCase
 {
+    /** @test */
     public function it_validates_unauthenticated_user(): void
     {
         // Mock job

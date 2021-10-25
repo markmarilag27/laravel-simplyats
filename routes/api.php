@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Auth\MeController;
+use App\Http\Controllers\API\Jobs\JobDestroyController;
 use App\Http\Controllers\API\Jobs\JobIndexController;
 use App\Http\Controllers\API\Jobs\JobShowController;
 use App\Http\Controllers\API\Jobs\JobStoreController;
@@ -37,4 +38,6 @@ Route::name('jobs.')->prefix('jobs')->group(function () {
     Route::put('{job:uuid}', JobUpdateController::class)->name('update');
     // api/jobs/{job:uuid}
     Route::get('{job:uuid}', JobShowController::class)->name('show');
+    // api/jobs/{job:uuid}
+    Route::delete('{job:uuid}', JobDestroyController::class)->name('delete');
 });
