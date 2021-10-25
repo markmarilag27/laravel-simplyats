@@ -1,17 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Models\Traits\HasUuid;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Applicant extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuid;
+    use HasFactory, HasUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -20,9 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'uuid',
-        'name',
+        'first_name',
+        'last_name',
+        'location',
         'email',
-        'password',
+        'phone',
+        'links'
     ];
 
     /**
@@ -30,11 +32,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'id',
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['id'];
 
     /**
      * The attributes that should be cast.
@@ -42,6 +40,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'links' => 'array'
     ];
 }
