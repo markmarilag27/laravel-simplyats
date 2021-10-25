@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Auth\MeController;
 use App\Http\Controllers\API\Jobs\JobIndexController;
 use App\Http\Controllers\API\Jobs\JobStoreController;
+use App\Http\Controllers\API\Jobs\JobUpdateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,6 @@ Route::name('jobs.')->prefix('jobs')->group(function () {
     Route::get('/', JobIndexController::class)->name('index');
     // api/jobs
     Route::post('/', JobStoreController::class)->name('store');
+    // api/jobs/{job:uuid}
+    Route::put('{job:uuid}', JobUpdateController::class)->name('update');
 });

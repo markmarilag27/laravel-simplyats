@@ -9,10 +9,10 @@ use App\Http\Requests\API\JobRequest;
 use App\Http\Resources\API\JobResource;
 use App\Models\Job;
 
-class JobStoreController extends Controller
+class JobUpdateController extends Controller
 {
     /**
-     * Create a new JobStoreController constructor.
+     * Create a new JobUpdateController constructor.
      *
      * @return void
      */
@@ -21,20 +21,14 @@ class JobStoreController extends Controller
         $this->middleware(['auth:sanctum', 'throttle:100,1']);
     }
 
-    #[Route("/api/jobs", methods: ["POST"])]
-    public function __invoke(JobRequest $request): JobResource
+    #[Route("/api/jobs/{job:uuid}", methods: ["PUT"])]
+    public function __invoke(JobRequest $request, Job $job): JobResource
     {
         // Get the validated data from the request
         $payload = $request->validated();
 
-        /** @var $userId */
-        $userId = $request->user()->id;
-
-        // Add up to payload
-        $payload['user_id'] = $userId;
-
-        /** @var $job */
-        $job = Job::create($payload);
+        // Update the job
+        $job->update($payload);
 
         return new JobResource($job->load('user'));
     }

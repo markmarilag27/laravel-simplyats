@@ -34,7 +34,10 @@ class Job extends Model
      *
      * @var array
      */
-    protected $hidden = ['id'];
+    protected $hidden = [
+        'id',
+        'user_id'
+    ];
 
     /**
      * The attributes that should be cast.
