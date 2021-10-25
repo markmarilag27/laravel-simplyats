@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\API\Jobs;
 
-use App\Enums\JobEnvironment;
-use App\Enums\JobExperience;
 use App\Enums\JobStatus;
-use App\Enums\JobType;
 use App\Http\Controllers\API\Jobs\JobUpdateController;
 use App\Models\Job;
 use App\Models\User;

@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Auth\MeController;
 use App\Http\Controllers\API\Jobs\JobIndexController;
+use App\Http\Controllers\API\Jobs\JobShowController;
 use App\Http\Controllers\API\Jobs\JobStoreController;
 use App\Http\Controllers\API\Jobs\JobUpdateController;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,6 @@ Route::name('jobs.')->prefix('jobs')->group(function () {
     Route::post('/', JobStoreController::class)->name('store');
     // api/jobs/{job:uuid}
     Route::put('{job:uuid}', JobUpdateController::class)->name('update');
+    // api/jobs/{job:uuid}
+    Route::get('{job:uuid}', JobShowController::class)->name('show');
 });
