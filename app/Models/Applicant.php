@@ -63,10 +63,47 @@ class Applicant extends Model implements HasMedia
 
     /*
      *******************************************************************************
+     * Accessor
+     * @doc https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor
+     *******************************************************************************
+     */
+
+    /**
+     * Get the full name of the applicant
+     *
+     * @return string
+     */
+    public function getNameAttribute(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    /*
+     *******************************************************************************
      * Eloquent Relationships
      * @doc https://laravel.com/docs/8.x/eloquent-relationships
      *******************************************************************************
      */
+
+    /**
+     * Get the associated job
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function job(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Job::class);
+    }
+
+    /**
+     * Get all associated jobs
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobs(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Job::class);
+    }
 
     /**
      * CV of applicant

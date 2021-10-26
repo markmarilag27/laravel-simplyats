@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Enums\MediaCollection;
+use App\Mail\ApplicantAppliedMail;
 use App\Models\Applicant;
+use Illuminate\Support\Facades\Mail;
 
 class JobApplicationAppliedAction
 {
@@ -24,7 +26,14 @@ class JobApplicationAppliedAction
         /** @var $applicant */
         $applicant = Applicant::firstOrCreate($payload);
 
+        // Add the cv file
         $this->addFile($applicant, $file);
+
+        // Load relationship
+        $applicant->load('job.user');
+
+        // Send email to the applicant
+        Mail::to($applicant)->send(new ApplicantAppliedMail($applicant));
     }
 
     /**
