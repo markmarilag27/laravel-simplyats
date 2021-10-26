@@ -6,8 +6,12 @@ namespace App\Models;
 
 use App\Enums\MediaCollection;
 use App\Models\Traits\HasUuid;
+use App\QueryFilters\Applicant\Name;
+use App\QueryFilters\Applicant\Status;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pipeline\Pipeline;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -122,4 +126,21 @@ class Applicant extends Model implements HasMedia
      * @doc https://laravel.com/docs/8.x/eloquent#local-scopes
      *******************************************************************************
      */
+
+    /**
+     * Filtered result
+     *
+     * @param Builder $query
+     * @return mixed
+     */
+    public function scopeHasFiltered(Builder $query): mixed
+    {
+        return app(Pipeline::class)
+            ->send($query)
+            ->through([
+                Name::class,
+                Status::class
+            ])
+            ->thenReturn();
+    }
 }

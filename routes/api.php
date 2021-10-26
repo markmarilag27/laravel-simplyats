@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\Applicants\ApplicantApplicationActionController;
+use App\Http\Controllers\API\Applicants\ApplicantIndexController;
+use App\Http\Controllers\API\Applicants\ApplicantTotalController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Auth\MeController;
@@ -49,6 +51,10 @@ Route::name('jobs.')->prefix('jobs')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::name('applicants.')->prefix('applicants')->group(function () {
+    // api/applicants
+    Route::get('/', ApplicantIndexController::class)->name('index');
+    // api/applicants/total
+    Route::get('total', ApplicantTotalController::class)->name('total');
     // api/applicants/{applicant:uuid}/action
     Route::post('{applicant:uuid}/action', ApplicantApplicationActionController::class)->name('action');
 });
