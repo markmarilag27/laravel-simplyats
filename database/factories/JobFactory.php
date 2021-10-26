@@ -25,8 +25,9 @@ class JobFactory extends Factory
      * Define the model's default state.
      *
      * @return array
+     * @throws \Exception
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'title'         => $this->faker->jobTitle(),
@@ -34,9 +35,27 @@ class JobFactory extends Factory
             'environment'   => $this->faker->randomElement(JobEnvironment::getValues()),
             'type'          => $this->faker->randomElement(JobType::getValues()),
             'experience'    => $this->faker->randomElement(JobExperience::getValues()),
-            'description'   => $this->faker->randomHtml(),
+            'description'   => $this->getDescription(),
             'status'        => $this->faker->randomElement(JobStatus::getValues()),
             'user_id'       => User::factory()
         ];
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    private function getDescription(): string
+    {
+        /** @var $result */
+        $result = '';
+        /** @var $paragraphs */
+        $paragraphs = $this->faker->paragraphs(random_int(2, 6));
+
+        foreach ($paragraphs as $paragraph) {
+            $result .= "<p>{$paragraph}</p>";
+        }
+
+        return $result;
     }
 }

@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', HomeController::class)->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('{job:uuid}', [HomeController::class, 'show'])->name('show');

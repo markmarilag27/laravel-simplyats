@@ -19,12 +19,14 @@ class Applicant extends Model
      */
     protected $fillable = [
         'uuid',
+        'job_id',
         'first_name',
         'last_name',
         'location',
         'email',
         'phone',
-        'links'
+        'links',
+        'status'
     ];
 
     /**

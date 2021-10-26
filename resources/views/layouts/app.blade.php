@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="my-20">
 
 <head>
     <meta charset="utf-8">
@@ -12,6 +12,8 @@
     <link rel="canonical" href="{{ url()->current() }}">
     <title>{{ config('app.name') }} -@stack('title')</title>
 
+    @stack('head_style')
+
     @if(app()->environment('local'))
         <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
         <script src="{{ mix("js/app.js") }}" defer></script>
@@ -21,7 +23,7 @@
     @endif
 </head>
 
-<body>
+<body class="bg-gray-50">
     @include('partials.top_navigation')
     {{-- end top navigation --}}
     @yield('content')

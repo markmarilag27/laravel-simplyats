@@ -69,9 +69,17 @@ Install telescope
 ```
 php artisan telescope:install
 ```
-Run the migration
+Run the migration and seed for john.doe@laravel.com password
 ```
-$ php artisan migrate
+$ php artisan migrate --seed
+```
+To generate 100,000 jobs
+```
+$ php artisan db:seed --class=JobSeeder
+```
+To generate 100,000 applicants
+```
+$ php artisan db:seed --class=ApplicantSeeder
 ```
 ### Test
 To make sure everything does not break run the test

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,8 +20,23 @@ class HomeController extends Controller
     }
 
     #[Route("/", methods: ["GET"])]
-    public function __invoke(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('pages.index');
+        /** @var $collection */
+        $collection = Job::query()
+            ->hasFiltered()
+            ->onlyActive()
+            ->latest('id');
+
+        return view('pages.index', [
+            'collection' => $collection->simplePaginate($request->per_page),
+            'total' => $collection->count()
+        ]);
+    }
+
+    #[Route("/{job:uuid}", methods: ["GET"])]
+    public function show(Job $job): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('pages.show', ['job' => $job->load('user')]);
     }
 }
