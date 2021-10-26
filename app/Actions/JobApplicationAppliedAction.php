@@ -6,6 +6,7 @@ namespace App\Actions;
 
 use App\Enums\MediaCollection;
 use App\Mail\ApplicantAppliedMail;
+use App\Mail\RecruiterReceiveApplicantMail;
 use App\Models\Applicant;
 use Illuminate\Support\Facades\Mail;
 
@@ -34,6 +35,9 @@ class JobApplicationAppliedAction
 
         // Send email to the applicant
         Mail::to($applicant)->send(new ApplicantAppliedMail($applicant));
+
+        // Send email to the recruiter
+        Mail::to($applicant->job?->user)->send(new RecruiterReceiveApplicantMail($applicant));
     }
 
     /**
