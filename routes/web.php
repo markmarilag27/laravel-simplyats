@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobApplicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('{job:uuid}', [HomeController::class, 'show'])->name('show');
+Route::get('{job:uuid}/apply', [JobApplicationController::class, 'show'])->name('apply');
+Route::post('{job:uuid}/apply', [JobApplicationController::class, 'store']);

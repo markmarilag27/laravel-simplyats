@@ -8,7 +8,7 @@
             placeholder="Type in job title..."
         >
         {{-- end input --}}
-        <button type="submit" class="appearance-none outline-none border rounded px-6 py-2 bg-gray-500 text-white hover:bg-gray-600">
+        <button type="submit" id="seach-main-btn" class="appearance-none outline-none border rounded px-6 py-2 bg-gray-500 text-white hover:bg-gray-600">
             Search
         </button>
     </div>

@@ -7,7 +7,16 @@
   \*****************************/
 /***/ (() => {
 
+document.addEventListener('DOMContentLoaded', function () {
+  var flashMessage = document.getElementById('flash-message');
 
+  if (flashMessage) {
+    setTimeout(function () {
+      var body = document.querySelector('body');
+      body.removeChild(flashMessage);
+    }, 5000);
+  }
+});
 
 /***/ }),
 

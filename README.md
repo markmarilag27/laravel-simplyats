@@ -1,5 +1,5 @@
 ## About
-A simple applicant tracking system for web developers who is looking for a job that can easily manage by the recruiter.
+A simple applicant tracking system for easily manage by the recruiter and frontend where job seeker can apply.
 
 ### Requirements
 To run this application you need to have:

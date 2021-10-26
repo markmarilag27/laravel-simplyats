@@ -24,6 +24,8 @@
 </head>
 
 <body class="bg-gray-50">
+    @include('components.flash_message')
+    {{-- end flash message --}}
     @include('partials.top_navigation')
     {{-- end top navigation --}}
     @yield('content')
