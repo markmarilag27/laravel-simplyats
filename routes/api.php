@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Applicants\ApplicantApplicationActionController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Auth\MeController;
@@ -40,4 +41,14 @@ Route::name('jobs.')->prefix('jobs')->group(function () {
     Route::get('{job:uuid}', JobShowController::class)->name('show');
     // api/jobs/{job:uuid}
     Route::delete('{job:uuid}', JobDestroyController::class)->name('delete');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Applicants API Routes
+|--------------------------------------------------------------------------
+*/
+Route::name('applicants.')->prefix('applicants')->group(function () {
+    // api/applicants/{applicant:uuid}/action
+    Route::post('{applicant:uuid}/action', ApplicantApplicationActionController::class)->name('action');
 });

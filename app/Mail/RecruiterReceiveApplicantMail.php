@@ -17,6 +17,7 @@ class RecruiterReceiveApplicantMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      *
+     * @param Applicant $applicant
      * @return void
      */
     public function __construct(public Applicant $applicant)

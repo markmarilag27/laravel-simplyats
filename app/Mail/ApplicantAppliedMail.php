@@ -14,14 +14,11 @@ class ApplicantAppliedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    /** @var $subject */
-    public $subject;
-
     /**
      * Create a new message instance.
      *
      * @param Applicant $applicant
-     * @returns void
+     * @return void
      */
     public function __construct(public Applicant $applicant)
     {

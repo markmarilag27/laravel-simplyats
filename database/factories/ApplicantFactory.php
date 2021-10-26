@@ -24,7 +24,7 @@ class ApplicantFactory extends Factory
     public function definition(): array
     {
         return [
-            'job_id'        => Job::inRandomOrder()->first(),
+            'job_id'        => Job::factory(),
             'first_name'    => $this->faker->firstName(),
             'last_name'     => $this->faker->lastName(),
             'location'      => $this->faker->country(),
