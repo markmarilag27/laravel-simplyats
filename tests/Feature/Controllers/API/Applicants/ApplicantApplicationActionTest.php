@@ -118,8 +118,7 @@ class ApplicantApplicationActionTest extends TestCase
             ->assertOk()
             ->assertJsonStructure(['data' => [
                 'uuid',
-                'first_name',
-                'last_name',
+                'name',
                 'location',
                 'email',
                 'phone',
