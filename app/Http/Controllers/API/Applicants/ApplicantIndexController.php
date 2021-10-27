@@ -26,6 +26,7 @@ class ApplicantIndexController extends Controller
     {
         /** @var $collection */
         $collection = Applicant::query()
+            ->with('job')
             ->hasFiltered()
             ->latest('id')
             ->simplePaginate($request->per_page);
