@@ -17,17 +17,19 @@ class JobResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'uuid'          => $this->uuid,
-            'title'         => $this->title,
-            'location'      => $this->location,
-            'environment'   => $this->environment,
-            'type'          => $this->type,
-            'experience'    => $this->experience,
-            'description'   => $this->description,
-            'status'        => $this->status,
-            'author'        => new UserResource($this->whenLoaded('user')),
-            'updated_at'    => $this->updated_at,
-            'created_at'    => $this->created_at
+            'uuid'                      => $this->uuid,
+            'title'                     => $this->title,
+            'location'                  => $this->location,
+            'environment'               => $this->environment,
+            'type'                      => $this->type,
+            'experience'                => $this->experience,
+            'description'               => $this->description,
+            'status'                    => $this->status,
+            'author'                    => new UserResource($this->whenLoaded('user')),
+            'updated_at'                => $this->updated_at,
+            'updated_at_from_now'       => $this->updated_at,
+            'created_at'                => $this->created_at,
+            'created_at_from_now'       => $this->created_at,
         ];
     }
 }
