@@ -38,7 +38,7 @@ class CVSeeder extends Seeder
             foreach ($applicants as $applicant) {
                 if (blank($applicant->curriculumVitae)) {
                     $applicant->addMediaFromUrl($this->sourceUrl)
-                        ->toMediaCollection(MediaCollection::CV);
+                        ->toMediaCollection(MediaCollection::CV, config('filesystems.default'));
                 }
             }
         });

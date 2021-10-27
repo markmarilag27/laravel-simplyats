@@ -31,6 +31,7 @@ List of used packages:
 - [Predis](https://github.com/predis/predis) A flexible and feature-complete Redis client for PHP.
 - [Laravel Media Library](https://github.com/spatie/laravel-medialibrary) Associate files with Eloquent models.
 - [Laravel Enum](https://github.com/BenSampo/laravel-enum) Simple, extensible and powerful enumeration implementation for Laravel.
+- [flysystem aws s3](https://github.com/thephpleague/flysystem-aws-s3-v3) Flysystem Adapter for AWS SDK V3
 
 
 ### PSR2 Coding Standard
@@ -57,6 +58,10 @@ Run docker compose to build and run services
 ```
 $ docker-compose up -d
 ```
+Create local bucket on minion or config aws s3 bucket
+```
+Open http://minio:9000
+```
 Install dependencies
 ```
 $ composer install
@@ -80,6 +85,10 @@ $ php artisan db:seed --class=JobSeeder
 To generate 100,000 applicants
 ```
 $ php artisan db:seed --class=ApplicantSeeder
+```
+To generate applicant CV
+```
+$ php artisan db:seed --class=CVSeeder
 ```
 ### Test
 To make sure everything does not break run the test

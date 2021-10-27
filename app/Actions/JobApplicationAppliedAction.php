@@ -50,6 +50,6 @@ class JobApplicationAppliedAction
     private function addFile(Applicant $applicant, $file): void
     {
         $applicant->addMedia($file)
-            ->toMediaCollection(MediaCollection::CV);
+            ->toMediaCollection(MediaCollection::CV, config('filesystems.default'));
     }
 }
