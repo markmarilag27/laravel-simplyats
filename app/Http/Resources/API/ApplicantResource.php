@@ -24,6 +24,7 @@ class ApplicantResource extends JsonResource
             'phone'                     => $this->phone,
             'status'                    => $this->status,
             'job'                       => new JobResource($this->whenLoaded('job')),
+            'cv'                        => new MediaResource($this->whenLoaded('curriculumVitae')),
             'updated_at'                => $this->updated_at,
             'updated_at_from_now'       => $this->updated_at->diffForHumans(),
             'created_at'                => $this->created_at,
