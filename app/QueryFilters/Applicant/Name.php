@@ -20,8 +20,8 @@ class Name extends Filter
         /** @var $request */
         $request = request(strtolower($this->filterName()));
         /** @var $term */
-        $term = preg_replace('/[^A-Za-z0-9\d]/', '', '[[:<:]]'. $request . '[[:>:]]');
+        $term = preg_replace('/[^A-Za-z0-9\s]/', '', $request);
         // Query
-        return $query->whereRaw("concat(first_name, '', last_name) RLIKE ?", [$term]);
+        return $query->whereRaw("concat(first_name, '', last_name) LIKE ?", $term . '%');
     }
 }

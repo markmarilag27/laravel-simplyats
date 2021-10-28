@@ -19,7 +19,7 @@ class Title extends Filter
         /** @var $request */
         $request = request(strtolower($this->filterName()));
         /** @var $term */
-        $term = preg_replace('/[^A-Za-z0-9\d]/', '', '[[:<:]]'. $request . '[[:>:]]');
-        return $query->where('title', 'RLIKE', $term);
+        $term = preg_replace('/[^A-Za-z0-9\s]/', '', $request);
+        return $query->where('title', 'LIKE', $term . '%');
     }
 }
