@@ -27,7 +27,8 @@ class JobIndexController extends Controller
         /** @var $collection */
         $collection = Job::query()
             ->with('user')
-            ->latest('id')
+            ->withCount('applicants')
+            ->hasFiltered()
             ->simplePaginate($request->per_page);
 
         return JobResource::collection($collection);

@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\JobStatus;
 use App\Models\Traits\HasUuid;
+use App\QueryFilters\Sort;
 use App\QueryFilters\Job\Title;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,6 +68,16 @@ class Job extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the applicants of the posted job
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function applicants(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Applicant::class);
+    }
+
     /*
      *******************************************************************************
      * Local scopes
@@ -96,7 +107,8 @@ class Job extends Model
         return app(Pipeline::class)
             ->send($query)
             ->through([
-                Title::class
+                Title::class,
+                Sort::class
             ])
             ->thenReturn();
     }

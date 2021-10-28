@@ -28,7 +28,6 @@ class ApplicantIndexController extends Controller
         $collection = Applicant::query()
             ->with(['job', 'curriculumVitae'])
             ->hasFiltered()
-            ->latest('id')
             ->simplePaginate($request->per_page);
 
         return ApplicantResource::collection($collection);

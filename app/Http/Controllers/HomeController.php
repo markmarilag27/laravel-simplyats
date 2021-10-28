@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\SortColumn;
 use App\Models\Job;
 use Illuminate\Http\Request;
 
@@ -24,9 +25,10 @@ class HomeController extends Controller
     {
         /** @var $collection */
         $collection = Job::query()
+            ->withCount('applicants')
             ->hasFiltered()
             ->onlyActive()
-            ->latest('id');
+            ->latest(SortColumn::ID);
 
         return view('pages.index', [
             'collection' => $collection->simplePaginate($request->per_page),

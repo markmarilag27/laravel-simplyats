@@ -8,6 +8,7 @@ use App\Enums\MediaCollection;
 use App\Models\Traits\HasUuid;
 use App\QueryFilters\Applicant\Name;
 use App\QueryFilters\Applicant\Status;
+use App\QueryFilters\Sort;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -139,7 +140,8 @@ class Applicant extends Model implements HasMedia
             ->send($query)
             ->through([
                 Name::class,
-                Status::class
+                Status::class,
+                Sort::class
             ])
             ->thenReturn();
     }
