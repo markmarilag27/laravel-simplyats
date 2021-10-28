@@ -22,9 +22,9 @@ class UserResource extends JsonResource
             'email'                          => $this->email,
             'email_verified_at'              => $this->email_verified_at,
             'updated_at'                     => $this->updated_at,
-            'updated_at_from_now'            => $this->updated_at,
+            'updated_at_from_now'            => $this->updated_at->diffForHumans(),
             'created_at'                     => $this->created_at,
-            'created_at_from_now'            => $this->created_at,
+            'created_at_from_now'            => $this->created_at->diffForHumans(),
         ];
     }
 }
