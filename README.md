@@ -1,6 +1,11 @@
 ## About
 A simple applicant tracking system for easily manage by the recruiter and frontend where job seeker can apply.
 
+### Planning and working
+- [Dropbox Paper](https://www.dropbox.com/scl/fi/xizllobyjoth8l2k0o61w/Overview_-SimplyATS.paper?dl=0&rlkey=yn8s5inyj8y5v889jdmrxe9di) Project overview
+- [Trello board](https://trello.com/b/oI3vllGH/simplyats) to manage the task
+- [Postman](https://documenter.getpostman.com/view/13045202/UV5dcZTW#ec159e40-7b09-4a12-84ae-a743a6645fac) for API documentation
+
 ### Requirements
 To run this application you need to have:
 - PHP Version: `^8.0`

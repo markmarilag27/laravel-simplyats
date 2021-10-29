@@ -1,0 +1,102 @@
+# https://docs.docker.com/compose/compose-file/compose-file-v3/
+version: '3.8'
+# Services
+services:
+
+  # PHP Interpreter
+  php:
+    build:
+      context: ./.docker/php
+      dockerfile: Dockerfile
+    image: markmarilag27/php/8
+    container_name: php
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - default
+
+  # Webserver
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/nginx/certs:/etc/nginx/certs
+    networks:
+      - default
+
+  # Database
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    environment:
+      MYSQL_DATABASE: "${DB_DATABASE:-homestead}"
+      MYSQL_USER: "${DB_USERNAME:-homestead}"
+      MYSQL_PASSWORD: "${DB_PASSWORD:-secret}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD:-secret}"
+    volumes:
+      - mysql-data:/var/lib/mysql/
+    networks:
+      - default
+
+  # Mail
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+        - "${MAIL_PORT:-1025}:1025"
+        - "8025:8025"
+    networks:
+      - default
+
+  # Redis
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - default
+
+  # Minio
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: minio server /data/minio --console-address ":8900"
+    ports:
+      - "9000:9000"
+      - "8900:8900"
+    environment:
+      MINIO_ROOT_USER: "${AWS_ACCESS_KEY_ID:-minio}"
+      MINIO_ROOT_PASSWORD: "${AWS_SECRET_ACCESS_KEY:-minio123}"
+    volumes:
+      - minio-data:/data/minio
+    networks:
+      - default
+
+# Networks
+networks:
+  default:
+    driver: bridge
+
+# Volumes
+volumes:
+  mysql-data:
+    driver: local
+  minio-data:
+    driver: local
+  redis-data:
+    driver: local
