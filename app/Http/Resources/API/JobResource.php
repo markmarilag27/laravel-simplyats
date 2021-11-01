@@ -26,7 +26,7 @@ class JobResource extends JsonResource
             'description'               => $this->description,
             'status'                    => $this->status,
             'author'                    => new UserResource($this->whenLoaded('user')),
-            'applicants_total'          => $this->applicants_total ?? 0,
+            'applicants_total'          => $this->applicants_count ?? 0,
             'updated_at'                => $this->updated_at,
             'updated_at_from_now'       => $this->updated_at->diffForHumans(),
             'created_at'                => $this->created_at,
