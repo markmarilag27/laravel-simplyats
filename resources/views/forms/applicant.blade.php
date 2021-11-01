@@ -26,7 +26,7 @@
         {{-- end col --}}
         <div class="flex-grow">
             <label for="phone" class="text-xs uppercase font-bold text-gray-500">Contact Number</label>
-            <input type="text" id="phone" name="phone" class="appearance-none outline-none w-full border rounded py-2 px-4 my-2" placeholder="Type in..." required>
+            <input type="text" id="phone" name="phone" class="appearance-none outline-none w-full border rounded py-2 px-4 my-2" maxlength="12" minlength="9" placeholder="Type in..." required>
         </div>
         {{-- end col --}}
         <div class="flex-grow">
